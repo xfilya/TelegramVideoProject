@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class TelegramManager : MonoBehaviour
 {
-    private const string TOKEN = "7512239461:AAF_JWzBv4ZkBRAoLqbAKWiUq5HDh_MwW4k";
+    private const string TOKEN = "";
 
     private TelegramBotClient _botClient;
     private readonly CancellationTokenSource _cts = new();
@@ -20,7 +20,7 @@ public class TelegramManager : MonoBehaviour
         _botClient = new TelegramBotClient(token: TOKEN, cancellationToken: _cts.Token);
 
         var bot = await _botClient.GetMeAsync();
-        Debug.Log($"Бот {bot.Username} успешно запустился!");
+        Debug.Log($"ГЃГ®ГІ {bot.Username} ГіГ±ГЇГҐГёГ­Г® Г§Г ГЇГіГ±ГІГЁГ«Г±Гї!");
 
         _botClient.OnMessage += OnMessage;
     }
@@ -32,19 +32,19 @@ public class TelegramManager : MonoBehaviour
         _cts.Cancel();
         _cts.Dispose();
 
-        Debug.Log($"Бот успешно выключился.");
+        Debug.Log($"ГЃГ®ГІ ГіГ±ГЇГҐГёГ­Г® ГўГ»ГЄГ«ГѕГ·ГЁГ«Г±Гї.");
     }
 
     private async Task OnMessage(Message message, UpdateType type)
     {
         if (message.Text == "/start")
         {
-            await _botClient.SendTextMessageAsync(message.Chat, $"Привет, {message.From.FirstName}! Вы успешно запустили бота.");
-            Debug.Log($"Привет, {message.From.FirstName}! Вы успешно запустили бота.");
+            await _botClient.SendTextMessageAsync(message.Chat, $"ГЏГ°ГЁГўГҐГІ, {message.From.FirstName}! Г‚Г» ГіГ±ГЇГҐГёГ­Г® Г§Г ГЇГіГ±ГІГЁГ«ГЁ ГЎГ®ГІГ .");
+            Debug.Log($"ГЏГ°ГЁГўГҐГІ, {message.From.FirstName}! Г‚Г» ГіГ±ГЇГҐГёГ­Г® Г§Г ГЇГіГ±ГІГЁГ«ГЁ ГЎГ®ГІГ .");
             return;
         }
 
-        await _botClient.SendTextMessageAsync(message.Chat, $"Пользователь {message.From.FirstName} написал: '{message.Text}'");
-        Debug.Log($"Пользователь {message.From.FirstName} написал: '{message.Text}'");
+        await _botClient.SendTextMessageAsync(message.Chat, $"ГЏГ®Г«ГјГ§Г®ГўГ ГІГҐГ«Гј {message.From.FirstName} Г­Г ГЇГЁГ±Г Г«: '{message.Text}'");
+        Debug.Log($"ГЏГ®Г«ГјГ§Г®ГўГ ГІГҐГ«Гј {message.From.FirstName} Г­Г ГЇГЁГ±Г Г«: '{message.Text}'");
     }
 }
